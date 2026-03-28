@@ -150,10 +150,13 @@
 }
 
 /* ===== DASHBOARD ===== */
+/* ===== DASHBOARD ===== */
 .dashboard-container {
   display: flex;
   min-height: 100vh;
-  background: #f4f6f9;
+  background: transparent;
+  position: relative;
+  z-index: 1;
 }
 
 /* ===== SIDEBAR ===== */
@@ -208,9 +211,10 @@
 .main {
   flex: 1;
   padding: 30px;
-  background: #f4f6f9;
+  background: transparent;
   position: relative;
   overflow-x: hidden;
+  z-index: 1;
 }
 
 /* Remove any background bubbles or circles */
@@ -315,6 +319,8 @@ tr:hover { background: #ffe5e5; }
   padding: 40px;
   max-width: 960px;
   margin: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .page-title {
@@ -560,11 +566,11 @@ body.dark {
 }
 
 body.dark .dashboard-container {
-  background: #1a1a1a;
+  background: transparent;
 }
 
 body.dark .main {
-  background: #1a1a1a;
+  background: transparent;
 }
 
 body.dark .card {

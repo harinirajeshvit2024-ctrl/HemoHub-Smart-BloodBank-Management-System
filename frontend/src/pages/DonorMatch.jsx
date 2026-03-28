@@ -4,12 +4,14 @@ import Sidebar from "../components/Sidebar";
 
 export default function DonorMatch({ darkMode, setDarkMode }) {
   const menuItems = [
-    { label: "Dashboard Stats", path: "/admin/dashboard-stats" },
-    { label: "Blood Inventory", path: "/admin/blood-inventory" },
-    { label: "Donor List", path: "/admin/donors" },
-    { label: "Pending Requests", path: "/admin/requests" },
-    { label: "Donor Match", path: "/admin/donor-match" }
-  ];
+  { label: "Dashboard Stats",  path: "/admin/dashboard-stats" },
+  { label: "Blood Inventory",  path: "/admin/blood-inventory" },
+  { label: "Donor List",       path: "/admin/donors" },
+  { label: "Pending Requests", path: "/admin/requests" },
+  { label: "Donor Match",      path: "/admin/donor-match" },
+  { label: "Manage Camps",     path: "/admin/camps" },
+  { label: "Audit Logs",       path: "/admin/audit-logs" }
+];
 
   const [bloodGroup, setBloodGroup] = useState("");
   const [city, setCity] = useState("");

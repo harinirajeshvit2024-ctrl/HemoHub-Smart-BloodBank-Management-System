@@ -18,9 +18,10 @@ try {
   pool.getConnection((err, connection) => {
     if (err) {
       console.log("⚠ MySQL connection failed (non-critical):", err.message);
+      console.log("⚠ Audit logs will be skipped until MySQL is fixed.");
       return;
     }
-    console.log("✅ MySQL connected");
+    console.log("✅ MySQL connected successfully");
     connection.release();
   });
 
@@ -37,7 +38,7 @@ module.exports = {
     try {
       return await promisePool.execute(...args);
     } catch (err) {
-      console.log("⚠ MySQL query failed (non-critical):", err.message);
+      console.log("⚠ MySQL query failed:", err.message);
       return [[], []];
     }
   }

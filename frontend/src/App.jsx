@@ -6,180 +6,77 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import BloodInventory from "./pages/BloodInventory";
 import AdminCamps from "./pages/AdminCamps";
-import BloodCells from "./components/BloodCells";
 import Chatbot from "./components/Chatbot";
+import EmergencyBackground from "./components/EmergencyBackground";
 
-// Donor
 import DonorLanding from "./pages/DonorLanding";
 import DonorRegister from "./pages/DonorRegister";
 import DonorHistory from "./pages/DonorHistory";
 import DonorTips from "./pages/DonorTips";
 
-// Staff
 import StaffLanding from "./pages/StaffLanding";
 import StaffRequest from "./pages/StaffRequest";
 import StaffPending from "./pages/StaffPending";
-//import StaffStock from "./pages/StaffStock";
 import StaffDashboard from "./pages/StaffDashboard";
-// Admin
+
 import AdminLanding from "./pages/AdminLanding";
 import AdminDashboardStats from "./pages/AdminDashboardStats";
 import AdminBloodInventory from "./pages/AdminBloodInventory";
 import AdminDonorList from "./pages/AdminDonorList";
 import AdminRequests from "./pages/AdminRequests";
 import AdminAuditLogs from "./pages/AdminAuditLogs";
+
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [isDashboard, setIsDashboard] = useState(false);
 
-  // GLOBAL BLOOD STOCK
   const [bloodStock, setBloodStock] = useState({
-    "A+": 0,
-    "A-": 0,
-    "B+": 0,
-    "B-": 0,
-    "O+": 0,
-    "O-": 0,
-    "AB+": 0,
-    "AB-": 0,
+    "A+": 0, "A-": 0, "B+": 0, "B-": 0,
+    "O+": 0, "O-": 0, "AB+": 0, "AB-": 0,
   });
 
-  // Apply dark class
   useEffect(() => {
     document.body.className = darkMode ? "dark" : "";
   }, [darkMode]);
 
+  // Show emergency background on all dashboard pages
+  useEffect(() => {
+    const path = window.location.pathname;
+    const onDash = path !== "/" && path !== "/register";
+    setIsDashboard(onDash);
+  }, []);
+
   return (
     <>
-    <BloodCells />
-    <Routes>
-      <Route path="/" element={<Login />} />
-<Route path="/register" element={<Register />} />
-      {/* Donor */}
-      <Route
-        path="/donor"
-        element={<DonorLanding darkMode={darkMode} setDarkMode={setDarkMode} />}
-      />
-      
-      <Route
-  path="/donor/register"
-  element={
-    <DonorRegister
-      darkMode={darkMode}
-      setDarkMode={setDarkMode}
-    />
-  }
-/>
-<Route
-  path="/admin/donor-match"
-  element={
-    <DonorMatch
-      darkMode={darkMode}
-      setDarkMode={setDarkMode}
-    />
-  }
-/>
-<Route
-  path="/admin/audit-logs"
-  element={
-    <AdminAuditLogs
-      darkMode={darkMode}
-      setDarkMode={setDarkMode}
-    />
-  }
-/>
-<Route
-  path="/admin/camps"
-  element={
-    <AdminCamps
-      darkMode={darkMode}
-      setDarkMode={setDarkMode}
-    />
-  }
-/>
-<Route
-  path="/admin/audit-logs"
-  element={
-    <AdminAuditLogs
-      darkMode={darkMode}
-      setDarkMode={setDarkMode}
-    />
-  }
-/>
-      <Route
-  path="/donor/history"
-  element={
-    <DonorHistory
-      darkMode={darkMode}
-      setDarkMode={setDarkMode}
-    />
-  }
-/>
-      <Route path="/donor/tips" element={<DonorTips />} />
-      <Route
-        path="/donor/camps"
-        element={<DonorCamps darkMode={darkMode} setDarkMode={setDarkMode} />}
-      />
+      {isDashboard && <EmergencyBackground />}
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-      {/* Staff */}
-      <Route
-        path="/staff"
-        element={<StaffLanding darkMode={darkMode} setDarkMode={setDarkMode} />}
-      />
-      <Route
-  path="/staff/dashboard"
-  element={
-    <StaffDashboard
-      darkMode={darkMode}
-      setDarkMode={setDarkMode}
-    />
-  }
-/>
-      <Route
-        path="/staff/request"
-        element={
-          <StaffRequest
-            bloodStock={bloodStock}
-            setBloodStock={setBloodStock}
-          />
-        }
-      />
-      <Route
-  path="/staff/pending"
-  element={
-    <StaffPending
-      darkMode={darkMode}
-      setDarkMode={setDarkMode}
-    />
-  }
-/>
-<Route
-  path="/staff"
-  element={
-    <StaffLanding
-      darkMode={darkMode}
-      setDarkMode={setDarkMode}
-    />
-  }
-/>
-      
+        {/* Donor */}
+        <Route path="/donor"          element={<DonorLanding   darkMode={darkMode} setDarkMode={setDarkMode} />} />
+        <Route path="/donor/register" element={<DonorRegister  darkMode={darkMode} setDarkMode={setDarkMode} />} />
+        <Route path="/donor/history"  element={<DonorHistory   darkMode={darkMode} setDarkMode={setDarkMode} />} />
+        <Route path="/donor/tips"     element={<DonorTips      darkMode={darkMode} setDarkMode={setDarkMode} />} />
+        <Route path="/donor/camps"    element={<DonorCamps     darkMode={darkMode} setDarkMode={setDarkMode} />} />
 
-      {/* Admin */}
-      <Route
-        path="/admin"
-        element={<AdminLanding darkMode={darkMode} setDarkMode={setDarkMode} />}
-      />
-      <Route
-        path="/admin/dashboard-stats"
-        element={<AdminDashboardStats bloodStock={bloodStock} />}
-      />
-      <Route
-        path="/admin/blood-inventory"
-        element={<AdminBloodInventory bloodStock={bloodStock} />}
-      />
-      <Route path="/admin/donors" element={<AdminDonorList />} />
-      <Route path="/admin/requests" element={<AdminRequests />} />
-    </Routes>
-    <Chatbot />
+        {/* Staff */}
+        <Route path="/staff"           element={<StaffLanding   darkMode={darkMode} setDarkMode={setDarkMode} />} />
+        <Route path="/staff/dashboard" element={<StaffDashboard darkMode={darkMode} setDarkMode={setDarkMode} />} />
+        <Route path="/staff/request"   element={<StaffRequest   darkMode={darkMode} setDarkMode={setDarkMode} />} />
+        <Route path="/staff/pending"   element={<StaffPending   darkMode={darkMode} setDarkMode={setDarkMode} />} />
+
+        {/* Admin */}
+        <Route path="/admin"                  element={<AdminLanding        darkMode={darkMode} setDarkMode={setDarkMode} />} />
+        <Route path="/admin/dashboard-stats"  element={<AdminDashboardStats bloodStock={bloodStock} />} />
+        <Route path="/admin/blood-inventory"  element={<AdminBloodInventory bloodStock={bloodStock} />} />
+        <Route path="/admin/donors"           element={<AdminDonorList />} />
+        <Route path="/admin/requests"         element={<AdminRequests />} />
+        <Route path="/admin/donor-match"      element={<DonorMatch    darkMode={darkMode} setDarkMode={setDarkMode} />} />
+        <Route path="/admin/camps"            element={<AdminCamps    darkMode={darkMode} setDarkMode={setDarkMode} />} />
+        <Route path="/admin/audit-logs"       element={<AdminAuditLogs darkMode={darkMode} setDarkMode={setDarkMode} />} />
+      </Routes>
+      <Chatbot />
     </>
   );
 }

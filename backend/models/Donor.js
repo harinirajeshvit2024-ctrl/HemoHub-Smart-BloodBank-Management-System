@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const DonorSchema = new mongoose.Schema({
   name:         { type: String, required: true },
+  username:     { type: String, default: "" },
   age:          { type: Number, required: true },
   weight:       { type: Number, required: true },
   bloodGroup:   { type: String, required: true },
