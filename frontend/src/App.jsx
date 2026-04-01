@@ -76,7 +76,9 @@ export default function App() {
         <Route path="/admin/camps"            element={<AdminCamps    darkMode={darkMode} setDarkMode={setDarkMode} />} />
         <Route path="/admin/audit-logs"       element={<AdminAuditLogs darkMode={darkMode} setDarkMode={setDarkMode} />} />
       </Routes>
-      <Chatbot />
+     {window.location.pathname !== "/" && 
+       window.location.pathname !== "/register" && 
+       <Chatbot />}
     </>
   );
 }
